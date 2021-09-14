@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 """
-Models for user, blog, comment
+@author: qinglin
+@time: 2021/9/13
+@desc: 数据实体 Models for user, blog, comment
 """
 
 import time, uuid

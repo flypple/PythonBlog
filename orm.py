@@ -1,8 +1,16 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+"""
+@author: qinglin
+@time: 2021/9/13
+@desc: 数据库orm框架
+"""
 
-import asyncio, logging, aiomysql
+import aiomysql
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 
 def log(sql, args=()):
