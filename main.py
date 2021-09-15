@@ -20,6 +20,7 @@ from aiohttp import web
 from jinja2 import Environment, FileSystemLoader
 from models import User
 from web_core import add_routes, add_static
+from config import configs
 
 logging.basicConfig(level=logging.INFO)
 
@@ -141,7 +142,7 @@ def datetime_filter(t):
 
 
 async def init_orm():
-    await orm.create_pool(loop=eventLoop, user='root', password='password', db='PythonBlog')
+    await orm.create_pool(loop=eventLoop, **configs.db)
 
 
 async def init_web():
