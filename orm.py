@@ -39,7 +39,9 @@ async def select(sql, args, size=None):
     global __pool
     async with __pool.get() as conn:
         async with conn.cursor(aiomysql.DictCursor) as cur:
-            await cur.execute(sql.replace('?', '%s'), args or ())
+            sql_str = sql.replace('?', '%s')
+            logging.info('execute sql: %s' % sql_str)
+            await cur.execute(sql_str, args or ())
             if size:
                 rs = await cur.fetchmany(size)
             else:
@@ -215,7 +217,7 @@ class Model(dict, metaclass=ModelMetaclass):
     @classmethod
     async def findNumber(cls, selectField, where=None, args=None):
         # find number by select and where
-        sql = 'select %s _num_ from `%s`' % (selectField, cls.__table__)
+        sql = ['select %s _num_ from `%s`' % (selectField, cls.__table__)]
         if where:
             sql.append('where')
             sql.append(where)
